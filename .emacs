@@ -20,7 +20,10 @@
   (set-face-attribute 'default nil :family "Input Mono")
   (set-face-attribute 'default nil :height 120))
 
-;; Only set Solarized in GUI mode. It looks awful in terminal
+;; Set Solarized to light in the GUI and dark in the terminal. The terminal
+;; needs to have ANSI colors set correctly, or this will look awful. For some
+;; reason, the frame hook doesn't set the initial frame, so we do an initial
+;; set ourselves. I'm guessing most of these lines aren't necessary, oh well.
 (add-to-list 'custom-theme-load-path "~/.emacs.d/emacs-color-theme-solarized")
 (if (display-graphic-p)
     (progn
