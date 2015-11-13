@@ -22,8 +22,19 @@
 
 ;; Only set Solarized in GUI mode. It looks awful in terminal
 (add-to-list 'custom-theme-load-path "~/.emacs.d/emacs-color-theme-solarized")
-(when window-system
-  (load-theme 'solarized t))
+(if (display-graphic-p)
+    (progn
+      (add-to-list 'default-frame-alist '(background-mode . light))
+      (set-frame-parameter nil 'background-mode 'light))
+  (set-terminal-parameter nil 'background-mode 'dark))
+
+(add-hook 'after-make-frame-functions
+          (lambda (frame)
+            (let ((mode (if (display-graphic-p frame) 'light 'dark)))
+              (set-frame-parameter frame 'background-mode mode)
+              (set-terminal-parameter frame 'background-mode mode))
+            (enable-theme 'solarized)))
+(load-theme 'solarized t)
 
 ;; No splash screen
 (setq inhibit-splash-screen t)
