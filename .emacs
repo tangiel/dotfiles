@@ -4,7 +4,7 @@
 (package-initialize)
 
 ;; Install packages, if necessary
-(setq package-list '(magit))
+(setq package-list '(magit yaml-mode flycheck))
 
 (or (file-exists-p package-user-dir)
     (package-refresh-contents))
@@ -76,6 +76,9 @@
 
 ;; Helpful mode for Git commits
 (require 'git-commit)
+
+;; Enable Flycheck for everything possible
+(add-hook 'after-init-hook #'global-flycheck-mode)
 
 ;; We don't care about running processes when quitting (sadly deprecated)
 ;;(defadvice save-buffers-kill-emacs (around no-query-kill-emacs activate)
