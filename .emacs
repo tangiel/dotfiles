@@ -43,7 +43,7 @@
 (setq inhibit-splash-screen t)
 
 ;; Navigate using words in multi-word identifiers
-(add-hook 'c-mode-common-hook '(lambda() (subword-mode)))
+(add-hook 'prog-mode-hook '(lambda() (subword-mode)))
 
 ;; For GUI Emacs, use Command as meta and Optional as super
 (when (and (eq system-type 'darwin) window-system)
