@@ -63,6 +63,16 @@
 (setq ring-bell-function 'ignore)
 
 ;; 80 character limit for C++, 100 for Java
+(defun font-lock-set-up-width-warning (width)
+  "Make text beyond column WIDTH appear in `font-lock-warning-face'."
+  (require 'font-lock)
+  (font-lock-mode 1)
+  (make-local-variable 'font-lock-keywords)
+  (font-lock-add-keywords
+   nil
+   `((,(format "^.\\{%d\\}\\(.+\\)" width)
+      1 font-lock-warning-face t))))
+
 (dolist (hook '(c++-mode-hook python-mode-hook))
   (add-hook hook '(lambda () (font-lock-set-up-width-warning 80))))
 (dolist (hook '(java-mode-hook))
