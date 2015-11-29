@@ -4,13 +4,19 @@
 (package-initialize)
 
 ;; Install packages, if necessary
-(setq package-list '(magit yaml-mode flycheck))
+(defvar package-list '(magit yaml-mode flycheck))
 
-(or (file-exists-p package-user-dir)
-    (package-refresh-contents))
-(dolist (package package-list)
-  (unless (package-installed-p package)
-    (package-install package)))
+(defun packages-installed-p (package-list)
+  (let ((installed t))
+    (dolist (package package-list)
+      (setq installed (and installed (package-installed-p package))))
+    installed))
+
+(unless (packages-installed-p package-list)
+  (package-refresh-contents)
+  (dolist (package package-list)
+    (unless (package-installed-p package)
+      (package-install package))))
 
 ;; Set font to Input Mono (Narrow for OS X)
 (when (eq system-type 'darwin)
