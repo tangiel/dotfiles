@@ -7,10 +7,9 @@
 (defvar package-list '(magit yaml-mode flycheck))
 
 (defun packages-installed-p (package-list)
-  (let ((installed t))
-    (dolist (package package-list)
-      (setq installed (and installed (package-installed-p package))))
-    installed))
+  (if (not package-list) t
+    (and (package-installed-p (car package-list))
+         (packages-installed-p (cdr package-list)))))
 
 (unless (packages-installed-p package-list)
   (package-refresh-contents)
