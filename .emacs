@@ -24,6 +24,9 @@
 (when (eq system-type 'gnu/linux)
   (set-face-attribute 'default nil :family "Input Mono")
   (set-face-attribute 'default nil :height 120))
+(when (eq system-type 'windows-nt)
+  (set-face-attribute 'default nil :family "InputMono")
+  (set-face-attribute 'default nil :height 120))
 
 ;; Set Solarized to light in the GUI and dark in the terminal. The terminal
 ;; needs to have ANSI colors set correctly, or this will look awful. For some
