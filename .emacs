@@ -115,7 +115,8 @@
 
 ;; Enable Flycheck for everything possible
 (when (require 'flycheck nil t)
-  (add-hook 'after-init-hook #'global-flycheck-mode))
+  (add-hook 'after-init-hook #'global-flycheck-mode)
+  (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc)))
 
 ;; Lilypond mode when installed (not in MELPA, as of now)
 (when (require 'lilypond-mode nil t)
