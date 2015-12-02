@@ -9,7 +9,9 @@
 (require 'local-pre-hooks nil t)
 
 ;; Install packages, if necessary
-(defvar package-list '(magit yaml-mode flycheck))
+(defvar package-list
+  '(flycheck flycheck-google-cpplint flycheck-pyflakes google-c-style magit
+             protobuf-mode py-autopep8 yaml-mode))
 
 (defun packages-installed-p (package-list)
   (if (not package-list) t
@@ -90,10 +92,6 @@
 (dolist (hook '(java-mode-hook))
   (add-hook hook '(lambda () (font-lock-set-up-width-warning 100))))
 
-;; Indent continuations four spaces rather than aligning
-(add-hook 'java-mode-hook
-          (lambda () (c-set-offset 'arglist-cont-nonempty '++)))
-
 ;; Centralize file backups so we don't have ~ files line around everywhere
 (setq backup-by-copying t  ; don't clobber symlinks
       backup-directory-alist '(("." . "~/.saves"))  ; don't litter my fs tree
@@ -116,11 +114,22 @@
 ;; Enable Flycheck for everything possible
 (when (require 'flycheck nil t)
   (add-hook 'after-init-hook #'global-flycheck-mode)
-  (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc)))
+  (setq-default flycheck-disabled-checkers
+                '(emacs-lisp-checkdoc python-flake8 python-pylint))
+
+  (when (require 'flycheck-google-cpplint nil t)
+    (flycheck-add-next-checker 'c/c++-clang
+                               'c/c++-googlelint 'append))
+  (require 'flycheck-pyflakes nil t))
 
 ;; Lilypond mode when installed (not in MELPA, as of now)
 (when (require 'lilypond-mode nil t)
   (add-to-list 'auto-mode-alist '("\\.ly$" . LilyPond-mode)))
+
+;; Google C style
+(when (require 'google-c-style nil t)
+  (add-hook 'c-mode-common-hook 'google-set-c-style)
+  (add-hook 'c-mode-common-hook 'google-make-newline-indent))
 
 (require 'local-post-hooks nil t)
 
