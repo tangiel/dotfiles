@@ -109,6 +109,10 @@
 ;; Enable Flycheck for everything possible
 (add-hook 'after-init-hook #'global-flycheck-mode)
 
+;; Lilypond mode when installed (not in MELPA, as of now)
+(when (require 'lilypond-mode nil t)
+  (add-to-list 'auto-mode-alist '("\\.ly$" . LilyPond-mode)))
+
 ;; We don't care about running processes when quitting (sadly deprecated)
 ;;(defadvice save-buffers-kill-emacs (around no-query-kill-emacs activate)
 ;;  "Prevent annoying \"Active processes exist\" query when you quit Emacs."
