@@ -1,6 +1,8 @@
 (require 'package)
-(add-to-list 'package-archives
-             '("melpa" . "https://melpa.org/packages/"))
+;; SSL doesn't work for Emacs on Windows
+(if (eq system-type 'windows-nt)
+    (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+  (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/")))
 (package-initialize)
 
 (add-to-list 'load-path "~/.emacs.d/lisp")
