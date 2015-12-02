@@ -3,6 +3,9 @@
              '("melpa" . "https://melpa.org/packages/"))
 (package-initialize)
 
+(add-to-list 'load-path "~/.emacs.d/lisp")
+(require 'local-pre-hooks nil t)
+
 ;; Install packages, if necessary
 (defvar package-list '(magit yaml-mode flycheck))
 
@@ -115,6 +118,8 @@
 ;; Lilypond mode when installed (not in MELPA, as of now)
 (when (require 'lilypond-mode nil t)
   (add-to-list 'auto-mode-alist '("\\.ly$" . LilyPond-mode)))
+
+(require 'local-post-hooks nil t)
 
 ;; We don't care about running processes when quitting (sadly deprecated)
 ;;(defadvice save-buffers-kill-emacs (around no-query-kill-emacs activate)
