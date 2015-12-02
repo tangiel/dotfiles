@@ -34,21 +34,17 @@
 ;; Set Solarized to light in the GUI and dark in the terminal. The terminal
 ;; needs to have ANSI colors set correctly, or this will look awful. For some
 ;; reason, the frame hook doesn't set the initial frame, so we do an initial
-;; set ourselves. I'm guessing most of these lines aren't necessary, oh well.
+;; set ourselves. For Windows, use dark as well, since it looks "better."
 (add-to-list 'custom-theme-load-path "~/.emacs.d/emacs-color-theme-solarized")
-(if (display-graphic-p)
-    (progn
-      (add-to-list 'default-frame-alist '(background-mode . light))
-      (set-frame-parameter nil 'background-mode 'light))
-  (set-terminal-parameter nil 'background-mode 'dark))
+(defun solarized-light-p (&optional frame)
+  (and (display-graphic-p frame) (not (eq system-type 'windows-nt))))
 
-(add-hook 'after-make-frame-functions
-          (lambda (frame)
-            (let ((mode (if (display-graphic-p frame) 'light 'dark)))
-              (set-frame-parameter frame 'background-mode mode)
-              (set-terminal-parameter frame 'background-mode mode))
-            (enable-theme 'solarized)))
-(load-theme 'solarized t)
+(when (member 'solarized (custom-available-themes))
+  (let ((mode (if (solarized-light-p) 'light 'dark)))
+    (add-to-list 'default-frame-alist '(background-mode . mode))
+    (set-frame-parameter nil 'background-mode mode)
+    (set-terminal-parameter nil 'background-mode mode))
+  (load-theme 'solarized t))
 
 ;; No splash screen
 (setq inhibit-splash-screen t)
