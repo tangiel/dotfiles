@@ -17,10 +17,13 @@
          (packages-installed-p (cdr package-list)))))
 
 (unless (packages-installed-p package-list)
-  (package-refresh-contents)
-  (dolist (package package-list)
-    (unless (package-installed-p package)
-      (package-install package))))
+  (condition-case err
+      (progn
+        (package-refresh-contents)
+        (dolist (package package-list)
+          (unless (package-installed-p package)
+            (package-install package))))
+    (error (message "Package install failed: %s" (error-message-string err)))))
 
 ;; Set font to Input Mono (Narrow for OS X)
 (when (eq system-type 'darwin)
@@ -108,10 +111,11 @@
                          (set-frame-size (selected-frame) 100 48))))
 
 ;; Helpful mode for Git commits
-(require 'git-commit)
+(require 'git-commit nil t)
 
 ;; Enable Flycheck for everything possible
-(add-hook 'after-init-hook #'global-flycheck-mode)
+(when (require 'flycheck nil t)
+  (add-hook 'after-init-hook #'global-flycheck-mode))
 
 ;; Lilypond mode when installed (not in MELPA, as of now)
 (when (require 'lilypond-mode nil t)
