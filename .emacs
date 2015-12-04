@@ -10,8 +10,17 @@
 
 ;; Install packages, if necessary
 (defvar package-list
-  '(flycheck flycheck-google-cpplint flycheck-pyflakes google-c-style magit
-             protobuf-mode py-autopep8 yaml-mode))
+  '(company
+    company-go
+    company-jedi
+    flycheck
+    flycheck-google-cpplint
+    go-mode
+    google-c-style
+    magit
+    protobuf-mode
+    py-autopep8
+    yaml-mode))
 
 (defun packages-installed-p (package-list)
   (if (not package-list) t
@@ -115,12 +124,11 @@
 (when (require 'flycheck nil t)
   (add-hook 'after-init-hook #'global-flycheck-mode)
   (setq-default flycheck-disabled-checkers
-                '(emacs-lisp-checkdoc python-flake8 python-pylint))
+                '(emacs-lisp-checkdoc python-flake8))
 
   (when (require 'flycheck-google-cpplint nil t)
     (flycheck-add-next-checker 'c/c++-clang
-                               'c/c++-googlelint 'append))
-  (require 'flycheck-pyflakes nil t))
+                               'c/c++-googlelint 'append)))
 
 ;; Lilypond mode when installed (not in MELPA, as of now)
 (when (require 'lilypond-mode nil t)
@@ -130,6 +138,18 @@
 (when (require 'google-c-style nil t)
   (add-hook 'c-mode-common-hook 'google-set-c-style)
   (add-hook 'c-mode-common-hook 'google-make-newline-indent))
+
+;; Go support
+(require 'go-mode-load nil t)
+
+;; Enable company for all programming modes
+(when (require 'company nil t)
+  (add-hook 'prog-mode-hook 'global-company-mode)
+  (setq-default company-idle-delay 0.2)
+  (when (require 'company-jedi nil t)
+    (add-to-list 'company-backends 'company-jedi))
+  (when (require 'company-go nil t)
+    (add-to-list 'company-backends 'company-go)))
 
 (require 'local-post-hooks nil t)
 
