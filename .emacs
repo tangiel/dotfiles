@@ -151,6 +151,9 @@
   (when (require 'company-go nil t)
     (add-to-list 'company-backends 'company-go)))
 
+;; To be like OS X, bind a hotkey to switch frames
+(global-set-key "\M-`" 'other-frame)
+
 (require 'local-post-hooks nil t)
 
 ;; We don't care about running processes when quitting (sadly deprecated)
