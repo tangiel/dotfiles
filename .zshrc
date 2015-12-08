@@ -25,6 +25,14 @@ export EDITOR=emacs
 bindkey '\ef' emacs-forward-word
 bindkey '\eb' emacs-backward-word
 
+# Shell history
+HISTSIZE=1000
+SAVEHIST=2000
+setopt APPEND_HISTORY
+setopt HIST_IGNORE_SPACE
+setopt HIST_IGNORE_ALL_DUPS
+unsetopt HIST_REDUCE_BLANKS
+
 if [[ -d "${HOME}/.zsh" ]]; then
   for file in "${HOME}"/.zsh/*; do
     source $file
