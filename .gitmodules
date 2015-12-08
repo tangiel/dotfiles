@@ -1,3 +1,9 @@
 [submodule ".emacs.d/emacs-color-theme-solarized"]
 	path = .emacs.d/emacs-color-theme-solarized
 	url = https://github.com/sellout/emacs-color-theme-solarized
+[submodule ".oh-my-zsh"]
+	path = .oh-my-zsh
+	url = https://github.com/robbyrussell/oh-my-zsh.git
+[submodule ".zsh/dircolors-solarized"]
+	path = .zsh/dircolors-solarized
+	url = https://github.com/seebi/dircolors-solarized

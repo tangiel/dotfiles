@@ -1,0 +1,10 @@
+case `uname -s` in
+  Darwin)
+    export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD
+    ;;
+  Linux)
+    if which dircolors >&/dev/null; then
+      eval `dircolors $HOME/.zsh/dircolors-solarized/dircolors.ansi-dark`
+    fi
+    ;;
+esac
