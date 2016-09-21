@@ -2,7 +2,7 @@
 
 DIR=~/code/dotfiles
 OLD_DIR=~/code/dotfiles_old
-FILES="emacs emacs.d"
+FILES="emacs emacs.d oh-my-zsh oh-my-zsh-custom zsh zshrc"
 
 mkdir -p $OLD_DIR
 
