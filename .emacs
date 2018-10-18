@@ -141,6 +141,9 @@
 
 ;; Go support
 (require 'go-mode-load nil t)
+(add-hook 'go-mode-hook
+          (lambda ()
+            (setq tab-width 2)))
 
 ;; Enable company for all programming modes
 (when (require 'company nil t)
