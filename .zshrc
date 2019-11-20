@@ -19,7 +19,8 @@ source $ZSH/oh-my-zsh.sh
 export LANG=en_US.UTF-8
 
 # Emacs!
-export EDITOR=emacs
+export EDITOR="emacsclient -c -a ''"
+alias emacs=${EDITOR}
 
 # Word movement that I'm more used to (I guess)
 bindkey '\ef' emacs-forward-word
