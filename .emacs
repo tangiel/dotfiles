@@ -56,10 +56,14 @@
   (and (display-graphic-p frame) (not (eq system-type 'windows-nt))))
 
 (when (member 'solarized (custom-available-themes))
-  (let ((mode (if (solarized-light-p) 'light 'dark)))
-    (add-to-list 'default-frame-alist '(background-mode . mode))
-    (set-frame-parameter nil 'background-mode mode)
-    (set-terminal-parameter nil 'background-mode mode))
+  (add-hook 'after-make-frame-functions
+            (lambda (frame)
+              (select-frame frame)
+              (let ((mode (if (solarized-light-p frame) 'light 'dark)))
+                (add-to-list 'default-frame-alist '(background-mode . mode))
+                (set-frame-parameter nil 'background-mode mode)
+                (set-terminal-parameter nil 'background-mode mode))
+              (enable-theme 'solarized)))
   (load-theme 'solarized t))
 
 ;; No splash screen
