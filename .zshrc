@@ -39,3 +39,6 @@ if [[ -d "${HOME}/.zsh" ]]; then
     source $file
   done
 fi
+
+# mosh completion
+compdef mosh=ssh
