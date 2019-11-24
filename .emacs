@@ -58,11 +58,10 @@
 (when (member 'solarized (custom-available-themes))
   (add-hook 'after-make-frame-functions
             (lambda (frame)
-              (select-frame frame)
               (let ((mode (if (solarized-light-p frame) 'light 'dark)))
                 (add-to-list 'default-frame-alist '(background-mode . mode))
-                (set-frame-parameter nil 'background-mode mode)
-                (set-terminal-parameter nil 'background-mode mode))
+                (set-frame-parameter frame 'background-mode mode)
+                (set-terminal-parameter frame 'background-mode mode))
               (enable-theme 'solarized)))
   (load-theme 'solarized t))
 
