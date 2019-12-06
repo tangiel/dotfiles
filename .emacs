@@ -73,9 +73,11 @@
 (add-hook 'prog-mode-hook '(lambda() (subword-mode)))
 
 ;; For GUI Emacs, use Command as meta and Optional as super
-(when (and (eq system-type 'darwin) window-system)
-  (setq mac-option-modifier 'super)
-  (setq mac-command-modifier 'meta))
+(add-hook 'after-make-frame-functions
+          (lambda (frame)
+            (when (and (eq system-type 'darwin) (display-graphic-p frame))
+              (setq mac-option-modifier 'super)
+              (setq mac-command-modifier 'meta))))
 
 ;; Shorter goto line shortcut, we use this often
 (global-set-key "\M-g" 'goto-line)
