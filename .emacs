@@ -18,6 +18,7 @@
     go-mode
     google-c-style
     magit
+    markdown-mode
     protobuf-mode
     py-autopep8
     yaml-mode))
