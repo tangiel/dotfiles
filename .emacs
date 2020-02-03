@@ -1,3 +1,6 @@
+;; move custom-set-variable etc to its own file
+(setq custom-file (concat user-emacs-directory "/custom.el"))
+
 (require 'package)
 ;; SSL doesn't work for Emacs on Windows
 (if (eq system-type 'windows-nt)
