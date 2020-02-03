@@ -23,6 +23,7 @@
     markdown-mode
     protobuf-mode
     py-autopep8
+    scss-mode
     yaml-mode))
 
 (defun packages-installed-p (package-list)
