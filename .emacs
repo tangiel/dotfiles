@@ -14,7 +14,6 @@
     company-go
     company-jedi
     flycheck
-    flycheck-google-cpplint
     go-mode
     google-c-style
     magit
