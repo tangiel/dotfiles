@@ -165,16 +165,11 @@
 ;; To be like OS X, bind a hotkey to switch frames
 (global-set-key "\M-`" 'other-frame)
 
-;; Set auto-fill-mode at 80 columns when editing Markdown
+;; Set auto-fill-mode at 79 columns when editing Markdown
 (add-hook 'markdown-mode-hook
           (lambda()
             (progn
-              (setq fill-column 80)
+              (setq fill-column 79)
               (auto-fill-mode))))
 
 (require 'local-post-hooks nil t)
-
-;; We don't care about running processes when quitting (sadly deprecated)
-;;(defadvice save-buffers-kill-emacs (around no-query-kill-emacs activate)
-;;  "Prevent annoying \"Active processes exist\" query when you quit Emacs."
-;;  (noflet ((process-list ())) ad-do-it))
