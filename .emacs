@@ -173,4 +173,6 @@
               (setq fill-column 79)
               (auto-fill-mode))))
 
+(setq css-indent-offset 2)
+
 (require 'local-post-hooks nil t)
