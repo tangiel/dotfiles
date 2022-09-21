@@ -23,6 +23,7 @@
     markdown-mode
     protobuf-mode
     py-autopep8
+    rainbow-mode
     scss-mode
     yaml-mode))
 
