@@ -176,4 +176,7 @@
 
 (setq css-indent-offset 2)
 
+;; Delete selection on typing
+(delete-selection-mode 1)
+
 (require 'local-post-hooks nil t)
