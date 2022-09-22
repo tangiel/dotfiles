@@ -176,6 +176,7 @@
               (auto-fill-mode))))
 
 (setq css-indent-offset 2)
+(setq js-indent-level 2)
 
 ;; Delete selection on typing
 (delete-selection-mode 1)
