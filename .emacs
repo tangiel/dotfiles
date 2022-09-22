@@ -61,7 +61,11 @@
 (defun solarized-light-p (&optional frame)
   (and (display-graphic-p frame) (not (eq system-type 'windows-nt))))
 
-(when (member 'solarized (custom-available-themes))
+;; Add (setq enable-solarized nil) to local-pre-hooks to disable Solarized.
+;; Other themes will get overridden.
+(defvar enable-solarized t)
+
+(when (and (member 'solarized (custom-available-themes)) enable-solarized)
   (add-hook 'after-make-frame-functions
             (lambda (frame)
               (let ((mode (if (solarized-light-p frame) 'light 'dark)))
