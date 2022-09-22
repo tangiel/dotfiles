@@ -13,7 +13,8 @@
 
 ;; Install packages, if necessary
 (defvar package-list
-  '(company
+  '(base16-theme
+    company
     company-go
     company-jedi
     flycheck
@@ -178,5 +179,8 @@
 
 ;; Delete selection on typing
 (delete-selection-mode 1)
+
+;; Use true color mode for base16 themes
+(setq base16-theme-256-color-source 'colors)
 
 (require 'local-post-hooks nil t)
