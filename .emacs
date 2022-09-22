@@ -74,7 +74,7 @@
 (setq inhibit-splash-screen t)
 
 ;; Navigate using words in multi-word identifiers
-(add-hook 'prog-mode-hook '(lambda() (subword-mode)))
+(add-hook 'prog-mode-hook (lambda() (subword-mode)))
 
 ;; For GUI Emacs, use Command as meta and Optional as super
 (add-hook 'after-make-frame-functions
@@ -107,9 +107,9 @@
       1 font-lock-warning-face t))))
 
 (dolist (hook '(c++-mode-hook python-mode-hook))
-  (add-hook hook '(lambda () (font-lock-set-up-width-warning 80))))
+  (add-hook hook (lambda () (font-lock-set-up-width-warning 80))))
 (dolist (hook '(java-mode-hook))
-  (add-hook hook '(lambda () (font-lock-set-up-width-warning 100))))
+  (add-hook hook (lambda () (font-lock-set-up-width-warning 100))))
 
 ;; Centralize file backups so we don't have ~ files line around everywhere
 (setq backup-by-copying t  ; don't clobber symlinks
